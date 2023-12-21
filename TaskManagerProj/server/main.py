@@ -7,8 +7,6 @@ from sqlalchemy import event
 import uvicorn
 import database 
 import crud, models, schemas
-# from api_routers.user_rest import router as user_api_router
-# from api_routers.tasks_rest import router as task_api_router
 
 database.Base.metadata.create_all(bind=database.engine)
 
@@ -32,8 +30,6 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
-# app.include_router(user_api_router)
-# app.include_router(task_api_router)
 
 # Tasks endpoints
 @app.get("/tasks/fetch/all")
@@ -93,14 +89,12 @@ async def create_user(user: schemas.UserCreate, response:Response, db:Session=De
     response.headers.append('Access-Control-Allow-Origin', '*')
     response.headers.append('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
     response.headers.append('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-
     try:
         user = crud.create_user(db=db, user=user)
         response.status_code = status.HTTP_200_OK
         await send_notification(f'User created')
     except:
         response.status_code = status.HTTP_404_NOT_FOUND
-
     return response
 
 
