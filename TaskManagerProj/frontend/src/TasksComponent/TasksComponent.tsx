@@ -32,12 +32,12 @@ function TasksComponent() {
           .then(response => {
             setTasks(response.data)
           }).
-          catch(err=>{
+          catch(()=>{
             console.log('err');
           })
     },[createdTasks])
 
-    function setCreatedTasksFunc(task:any){
+    function setCreatedTasksFunc(){
       setCreatedTasks([...createdTasks, '1'])
     }
 

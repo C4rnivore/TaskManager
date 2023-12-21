@@ -1,5 +1,5 @@
 import './AddTaskButton.css'
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import Popup from 'reactjs-popup';
 import axios from 'axios';
 
@@ -9,12 +9,8 @@ const api = 'http://127.0.0.1:8000/'
 const AddTaskButton: FC<{callbackFunc:Function}> = (props) =>{ 
     const [title,setTitle] = useState<string>('')
     const [descr,setDescr] = useState<string>('')
-    const [tasks, setTasks] = useState<any>([])
     const [popupOpen, setPopupOpen] = useState<boolean>(false)
 
-    useEffect(()=>{
-        console.log('tasks changed');
-    },[tasks])
 
     const handleFormSubmit = (e:any) => {
         axios({
@@ -22,7 +18,7 @@ const AddTaskButton: FC<{callbackFunc:Function}> = (props) =>{
             url: api + 'tasks/add/' + 123,
             data: { title: title, description:descr }
         })
-        .then(function (response) {
+        .then(function () {
             console.log(`Succesfully created new task`);
             props.callbackFunc()
         })
@@ -34,11 +30,11 @@ const AddTaskButton: FC<{callbackFunc:Function}> = (props) =>{
     }
 
     const handleTitleChange = (e:any) => {
-        setTitle(cur=> cur = e.target.value)
+        setTitle(e.target.value)
     }
 
     const handleDescriptionChange = (e:any) => {
-        setDescr(cur => cur = e.target.value)
+        setDescr(e.target.value)
     }
 
     return (

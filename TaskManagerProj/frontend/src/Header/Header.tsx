@@ -1,10 +1,9 @@
 import Popup from 'reactjs-popup';
 import './Header.css'
-import { FC, useContext, useState } from 'react';
+import { FC, useState } from 'react';
 import axios from 'axios';
-import { UserContext } from '../App/App';
 
-const Header: FC<{}> = (props) => {
+const Header: FC<{}> = () => {
     const api = 'http://127.0.0.1:8000/'
     const [userName, setUsername] = useState<string>('')
     const [pass, setPass] = useState<string>('')
@@ -15,7 +14,7 @@ const Header: FC<{}> = (props) => {
             url: api + 'users/create',
             data: { username: userName, password:pass }
         })
-        .then(function (response) {
+        .then(function () {
             console.log(`Succesfully created new user`);
             localStorage.setItem('username', userName)
             window.location.reload()
@@ -27,10 +26,10 @@ const Header: FC<{}> = (props) => {
         e.preventDefault();
     }
     const handleUsernameChange = (e:any) =>{     
-        setUsername(cur=> cur = e.target.value)
+        setUsername(e.target.value)
     }
     const handlePassChange = (e:any) =>{
-        setPass(cur=> cur = e.target.value)
+        setPass(e.target.value)
     }
     
     const logout =() =>{

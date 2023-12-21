@@ -8,28 +8,27 @@ const Task:FC<{title:string, description:string, taskId:number, callbackFunc:Fun
     const api = 'http://127.0.0.1:8000/'
     const [title, setTitle] = useState<string>('')
     const [descr, setDescr] = useState<string>('')
-    const [popupOpen, setPopupOpen] = useState<boolean>(false)
 
     function deleteTask(id:any){
         axios({
             method: 'delete',
             url: api + 'tasks/delete/' + id,
         })
-        .then(function (res) {
+        .then(function () {
             console.log(`Succesfully delete task [ Task id = ${id} ]`);
             props.callbackFunc()
         })
-        .catch(function (error) {
+        .catch(function () {
             console.log(`Error occured when trying to delete task [ Task id = ${id} ]`);
         });
     }
 
     const handleTitleChange = (e:any) => {
-        setTitle(cur=> cur = e.target.value)
+        setTitle(e.target.value)
     }
 
     const handleDescriptionChange = (e:any) => {
-        setDescr(cur => cur = e.target.value)
+        setDescr(e.target.value)
     }
 
     const handleFormSubmit = (e:any) =>{
@@ -38,7 +37,7 @@ const Task:FC<{title:string, description:string, taskId:number, callbackFunc:Fun
             url: api + 'tasks/update/' + props.taskId,
             data: { title: title, description: descr }
         })
-        .then(function (response) {
+        .then(function () {
             console.log(`Succesfully updated task`);
             props.callbackFunc()
         })
