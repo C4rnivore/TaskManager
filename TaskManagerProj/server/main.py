@@ -4,14 +4,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from sqlalchemy.orm import Session
 from sqlalchemy import event
+import uvicorn
 import database 
 import crud, models, schemas
+# from api_routers.user_rest import router as user_api_router
+# from api_routers.tasks_rest import router as task_api_router
 
 database.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
-
-FRONTEND_BASE_URL ='http://localhost:5173/'
 
 # python -m uvicorn main:app --reload  
 
@@ -30,6 +31,9 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*'],
 )
+
+# app.include_router(user_api_router)
+# app.include_router(task_api_router)
 
 # Tasks endpoints
 @app.get("/tasks/fetch/all")
@@ -120,3 +124,6 @@ async def websocket_endpoint(websocket: WebSocket):
         except:
             pass
             break
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

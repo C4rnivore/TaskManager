@@ -3,11 +3,12 @@ import './Task.css'
 import axios from 'axios';
 import Popup from 'reactjs-popup';
 
-const Task:FC<{title:string, description:string, taskId:number}> = (props) =>{
+const Task:FC<{title:string, description:string, taskId:number, callbackFunc:Function}> = (props) =>{
 
     const api = 'http://127.0.0.1:8000/'
     const [title, setTitle] = useState<string>('')
     const [descr, setDescr] = useState<string>('')
+    const [popupOpen, setPopupOpen] = useState<boolean>(false)
 
     function deleteTask(id:any){
         axios({
@@ -16,7 +17,7 @@ const Task:FC<{title:string, description:string, taskId:number}> = (props) =>{
         })
         .then(function (res) {
             console.log(`Succesfully delete task [ Task id = ${id} ]`);
-            window.location.reload()
+            props.callbackFunc()
         })
         .catch(function (error) {
             console.log(`Error occured when trying to delete task [ Task id = ${id} ]`);
@@ -39,7 +40,7 @@ const Task:FC<{title:string, description:string, taskId:number}> = (props) =>{
         })
         .then(function (response) {
             console.log(`Succesfully updated task`);
-            window.location.reload()
+            props.callbackFunc()
         })
         .catch(function (error) {
             console.log(`Error occured when trying to updated task`);
@@ -60,7 +61,7 @@ const Task:FC<{title:string, description:string, taskId:number}> = (props) =>{
             <span className='task-id'> task id = {props.taskId} </span>
             <div className="task-buttons-container">
                 <Popup trigger={
-                                <button className="delete-task-btn" >
+                                <button className="delete-task-btn">
                                     Edit
                                 </button>} position="right top">
                     <div className="popup-form">

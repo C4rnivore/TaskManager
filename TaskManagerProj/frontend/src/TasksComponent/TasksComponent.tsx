@@ -7,18 +7,18 @@ import AddTaskButton from './AddTaskButton/AddTaskButton';
 
 function TasksComponent() {
     const [tasks, setTasks] = useState<Array<any>>([])
+    const [createdTasks, setCreatedTasks] = useState<Array<any>>([])
     const { addToast } = useToasts();
+    const ws_api = 'ws://localhost:8000/ws'
+    const api = 'http://127.0.0.1:8000/'
     let ws:WebSocket|null = null
 
-    const ws_api = 'ws://localhost:8000/ws'
     useEffect(()=>{
       ws = new WebSocket(ws_api)
       ws.onmessage = (e:any)=>{
         addToast(e.data, { appearance: 'info' });
       } 
     },[])
-
-    const api = 'http://127.0.0.1:8000/'
 
     useEffect(()=>{
         axios({
@@ -35,16 +35,24 @@ function TasksComponent() {
           catch(err=>{
             console.log('err');
           })
-    },[])
+    },[createdTasks])
+
+    function setCreatedTasksFunc(task:any){
+      setCreatedTasks([...createdTasks, '1'])
+    }
+
+    function deleteCreatedTaskFunction(){
+      setCreatedTasks([...createdTasks, '1'])
+    }
 
     return ( 
         <section id='TasksComponent'>
             <div className="tasks-container">
                 {tasks.map((task,index)=>(
-                    <Task key={index} title={task.title} description={task.description} taskId={task.id}/>
+                    <Task key={index} title={task.title} description={task.description} taskId={task.id} callbackFunc={deleteCreatedTaskFunction}/>
                 ))}
             </div>
-            <AddTaskButton/>
+            <AddTaskButton callbackFunc={setCreatedTasksFunc}/>
         </section>
      );
 }

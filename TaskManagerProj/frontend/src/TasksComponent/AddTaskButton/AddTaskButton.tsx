@@ -6,9 +6,15 @@ import axios from 'axios';
 const api = 'http://127.0.0.1:8000/'
 
 
-const AddTaskButton: FC<{}> = (props) =>{ 
+const AddTaskButton: FC<{callbackFunc:Function}> = (props) =>{ 
     const [title,setTitle] = useState<string>('')
     const [descr,setDescr] = useState<string>('')
+    const [tasks, setTasks] = useState<any>([])
+    const [popupOpen, setPopupOpen] = useState<boolean>(false)
+
+    useEffect(()=>{
+        console.log('tasks changed');
+    },[tasks])
 
     const handleFormSubmit = (e:any) => {
         axios({
@@ -18,7 +24,7 @@ const AddTaskButton: FC<{}> = (props) =>{
         })
         .then(function (response) {
             console.log(`Succesfully created new task`);
-            window.location.reload()
+            props.callbackFunc()
         })
         .catch(function (error) {
             console.log(`Error occured when trying to create new task`);
@@ -37,8 +43,8 @@ const AddTaskButton: FC<{}> = (props) =>{
 
     return (
         <div className="button-add">
-            <Popup trigger={
-                <button id='add-task-btn'>
+            <Popup open={popupOpen} trigger={
+                <button id='add-task-btn' onClick={()=>setPopupOpen(true)}>
                     +
                 </button> 
                 } position="left bottom">
@@ -55,7 +61,7 @@ const AddTaskButton: FC<{}> = (props) =>{
                             placeholder='Enter task secription'
                             onChange={handleDescriptionChange}/>
                         </div>
-                        <button className='create-task-btn' type='submit'>Create task</button>
+                        <button className='create-task-btn' type='submit' onClick={()=>setPopupOpen(false)}>Create task</button>
                     </form>
                     
                 </div>
