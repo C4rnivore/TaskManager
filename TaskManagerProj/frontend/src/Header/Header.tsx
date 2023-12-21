@@ -8,7 +8,7 @@ const Header: FC<{}> = (props) => {
     const api = 'http://127.0.0.1:8000/'
     const [userName, setUsername] = useState<string>('')
     const [pass, setPass] = useState<string>('')
-    const {user, setUser} = useContext(UserContext)
+    // const {user, setUser} = useContext(UserContext)
 
     const handleLogInSubmit = (e:any) => {
         axios({
@@ -36,9 +36,7 @@ const Header: FC<{}> = (props) => {
     const logout =() =>{
         localStorage.removeItem('username')
         window.location.reload()
-    }
-    console.log(user);
-    
+    }    
 
     if(!localStorage.getItem('username')){
         return( 

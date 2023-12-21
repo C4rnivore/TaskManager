@@ -4,6 +4,7 @@ import Header from '../Header/Header'
 import TasksComponent from '../TasksComponent/TasksComponent'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Dispatch, createContext, useEffect, useState } from 'react';
+import { ToastProvider, useToasts } from 'react-toast-notifications';
 
 export interface User{
   username:string | null,
@@ -14,19 +15,21 @@ export const UserContext = createContext<{user:User|undefined, setUser:Dispatch<
 
 function App() {
   const [user, setUser] = useState<User>(null!)
+  
 
   return (
-    <BrowserRouter>
-      <UserContext.Provider value={{user, setUser}}>
-        <Header/>
-        <Routes>
-            <Route path='/' element={
-              <TasksComponent/>
-            }/>
-          
-        </Routes>
-      </UserContext.Provider>
-    </BrowserRouter>
+    <ToastProvider autoDismiss={true} autoDismissTimeout={3000}>
+      <BrowserRouter>
+          <UserContext.Provider value={{user, setUser}}>
+            <Header/>
+            <Routes>
+                <Route path='/' element={
+                  <TasksComponent/>
+                }/>
+            </Routes>
+          </UserContext.Provider>
+      </BrowserRouter>
+    </ToastProvider>
   )
 }
 

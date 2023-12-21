@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useToasts } from 'react-toast-notifications';
 import './TasksComponent.css'
 import Task from './Task/Task';
 import axios from 'axios';
@@ -6,6 +7,16 @@ import AddTaskButton from './AddTaskButton/AddTaskButton';
 
 function TasksComponent() {
     const [tasks, setTasks] = useState<Array<any>>([])
+    const { addToast } = useToasts();
+    let ws:WebSocket|null = null
+
+    const ws_api = 'ws://localhost:8000/ws'
+    useEffect(()=>{
+      ws = new WebSocket(ws_api)
+      ws.onmessage = (e:any)=>{
+        addToast(e.data, { appearance: 'info' });
+      } 
+    },[])
 
     const api = 'http://127.0.0.1:8000/'
 
@@ -26,7 +37,6 @@ function TasksComponent() {
           })
     },[])
 
-
     return ( 
         <section id='TasksComponent'>
             <div className="tasks-container">
@@ -34,7 +44,7 @@ function TasksComponent() {
                     <Task key={index} title={task.title} description={task.description} taskId={task.id}/>
                 ))}
             </div>
-            <AddTaskButton toggle={false}/>
+            <AddTaskButton/>
         </section>
      );
 }
