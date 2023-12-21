@@ -1,0 +1,6 @@
+#main{
+  width: calc(100dvw - 240px);
+  padding-inline: 120px;
+  min-height: 100dvh;
+  background-color: var(--primary-color);
+}

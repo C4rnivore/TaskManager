@@ -1,0 +1,89 @@
+header{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    top:0;
+    left: 0;
+    width: calc(100% - 120px);
+    padding: 20px 60px;
+    background-color: var(--primary-color);
+    border-bottom: 1px solid #1f1e20;
+}
+
+header > span{
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: #1f1e20;
+}
+
+header > span > span{
+    font-weight: 100;
+}
+
+.buttons-container,.username-container{
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+}
+
+.header-btn{
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.header-btn:hover{
+    cursor: pointer;
+}
+
+.login-btn{
+    border: 2px solid #1f1e20;
+    background: none;
+    color: #1f1e20;
+    transition: 150ms ease-in-out;
+}
+
+.login-btn:hover{
+    background: #1f1e20;
+    color: #fff;
+}
+
+.signup-btn{
+    background: #1f1e20;
+    color: #fff;
+    border: none;
+}
+
+.header-form{
+    display:flex;
+    flex-direction: column;
+    gap:5px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.header-form > label{
+    color: black;
+    font-size: 16px;
+}
+.header-form > input{
+    padding: 5px 10px;
+    color: black;
+    font-size: 16px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: .5px solid black;
+}
+.header-form > button{
+    padding: 5px 10px;
+}
+
+.username-container > span{
+    color: black;
+    font-size: 20px;
+}
+.username-container > button{
+    padding: 5px 10px;
+}

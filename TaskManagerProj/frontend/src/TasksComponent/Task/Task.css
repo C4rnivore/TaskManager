@@ -1,0 +1,64 @@
+.task-card{
+    position: relative;
+    width: 500px;
+    /* min-height: 150px; */
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    color:#1f1e20;
+    padding: 40px 60px;
+    border: 1px solid #1f1e20;
+    background-color: #fff;
+    border-radius: 5px;
+    flex-shrink:0 ;
+}
+.task-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Poppins',sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+.task-description{
+    height: max-content;
+    max-height: 150px;
+    overflow-y: scroll;
+    word-break: break-all;
+}
+.task-id{
+    opacity: 0.5;
+    position: absolute;
+    right:20px;
+    bottom:17px;
+}
+.task-buttons-container{
+    display: flex;
+    flex-direction: row;
+    gap:16px;
+}
+.task-buttons-container > button{
+    padding: 10px 20px;
+}
+.deletion-popup{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    align-items: flex-start;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.deletion-popup> span{
+    color:black
+}
+.popupbtns{
+    display: flex;
+    flex-direction: row;
+    gap:5px;
+}
+.popupbtns>button{
+    padding: 5px 10px;
+}

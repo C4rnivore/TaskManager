@@ -1,0 +1,60 @@
+#add-task-btn{
+    position: absolute;
+    right: 30px;
+    bottom:30px;
+    padding: 20px;
+}
+.popup-form> form{
+    font-family: 'Poppins', sans-serif;
+    color: black;
+    display: flex;
+    font-size: 20px;
+    flex-direction: column;
+    gap:20px;
+}
+.popup-form > form > input{
+    padding: 10px 20px;
+    background-color: transparent;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+}
+.popup-form{
+    width: 600px;
+    height: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+.form-text-area{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-text-area> textarea{
+    max-height: 150px;
+    max-width: calc(100% - 40px);
+    background-color: transparent;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 20px;
+}
+.create-task-btn{
+    width: max-content;
+    padding: 10px 20px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.create-task-btn:hover{
+    cursor: pointer;
+    background-color: black;
+    
+}

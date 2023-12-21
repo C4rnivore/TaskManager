@@ -1,0 +1,13 @@
+#TasksComponent{
+    width: calc(100% - 120px);
+    padding: 0 60px;
+    padding-top: 100px;
+    background-color: var(--primary-color);
+    min-height: calc(100dvh - 100px);
+}
+.tasks-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:20px;
+}
